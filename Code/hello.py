@@ -12,20 +12,7 @@ df = pd.read_excel(filename)
 # Get all values from a column (e.g., 'column_name')
 #values += df["Right-Diagnostic Keywords"].tolist()  # Convert to list if needed
 
-def dataExtract(filename, listofColumns):
-    df = pd.read_excel(filename)
-    
-    keywords = df[listofColumns[0]].tolist()
-    N = df[listofColumns[1]].tolist()
-    D = df[listofColumns[2]].tolist()           
-    G = df[listofColumns[3]].tolist()
-    C = df[listofColumns[4]].tolist()
-    A = df[listofColumns[5]].tolist()
-    H = df[listofColumns[6]].tolist()
-    M = df[listofColumns[7]].tolist()
-    O = df[listofColumns[8]].tolist()
 
-    return {listofColumns[0]: keywords, "N": N, "D": D, "G": G, "C": C, "A": A, "H": H, "M": M, "O": O}
 
 Leftdata = dataExtract("C:\someFiles\githubRepo\RetinaDxCode\LeftFundusDSB.xlsx", ["Left-Diagnostic Keywords", "N", "D", "G", "C", "A", "H", "M", "O"])
 #print(data["Left-Diagnostic Keywords"])
