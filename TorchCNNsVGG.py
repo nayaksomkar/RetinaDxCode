@@ -17,7 +17,7 @@ def train():
         print("No GPU found, running on CPU.")
 
     # Step 2: Define Dataset Path
-    DATASET_PATH = r"C:\Users\nayak\Downloads\Dataset X"
+    DATASET_PATH = r"C:\someFiles\githubRepo\RetinaDx\RetinaDxDataSet\Dataset X"
 
     # Step 3: Image Transformations (Reduce size to 224 for faster training)
     transform = transforms.Compose([
@@ -43,9 +43,9 @@ def train():
     val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False, num_workers=4, pin_memory=True)
     test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False, num_workers=4, pin_memory=True)
 
-    # Step 6: Use Pretrained ResNet for Faster Training
-    model = models.resnet18(pretrained=True)
-    model.fc = nn.Linear(model.fc.in_features, num_classes)  # Replace final layer
+    # Step 6: Use Pretrained VGG for Faster Training
+    model = models.vgg16(pretrained=True)
+    model.classifier[6] = nn.Linear(model.classifier[6].in_features, num_classes)  # Replace final layer
     model = model.to(device)
     
     print("\nUsing Pretrained Model:\n", model)
@@ -128,6 +128,9 @@ def train():
 
     test_accuracy = 100 * correct / total
     print(f"\nFinal Model Accuracy: {test_accuracy:.2f}%")
+
+    # Save the model
+    torch.save(model.state_dict(), "TorchCNNsVGG.pth")
 
 if __name__ == "__main__":
     train()
